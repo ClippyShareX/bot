@@ -19,7 +19,7 @@ export default class LookupCommand extends BaseCommand {
         try {
             const { user } = await this.client.api.getUser(message.mentions[0] ? message.mentions[0] .id : args[0]);
             const embed = new Embed()
-                .setDescription(`UID ${user.uid} | [${user.username}](https://dny.wtf/u/${user.uid}) (${user.role})`)
+                .setDescription(`UID ${user.uid} | [${user.username}](https://clippy.gg/u/${user.uid}) (${user.role})`)
                 .setThumbnail({url: user.avatar})
                 .setFooter({
                     text: `UUID ${user.uuid} | Invited by ${user.invitedBy}`
