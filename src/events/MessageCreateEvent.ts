@@ -26,6 +26,7 @@ export default class MessageCreateEvent extends BaseEvent {
 
     async run(message: Message) {
         if (message.author.bot) return;
+        if (!message.guild) return;
 
         const prefix = process.env.PREFIX;
         try {
