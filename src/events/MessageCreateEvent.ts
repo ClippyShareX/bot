@@ -1,5 +1,5 @@
-import {Message, TextChannel} from 'eris';
-import {Embed, Error} from '../utils/Embeds';
+import {Message} from 'eris';
+import {Error} from '../utils/Embeds';
 import BaseCommand from '../utils/structures/BaseCommand';
 import BaseEvent from '../utils/structures/BaseEvent';
 
@@ -26,7 +26,7 @@ export default class MessageCreateEvent extends BaseEvent {
 
     async run(message: Message) {
         if (message.author.bot) return;
-        if (!message.guild) return;
+        if (message.channel.type === 1 || 3) return;
 
         const prefix = process.env.PREFIX;
         try {
