@@ -52,7 +52,7 @@ export default class API {
                 headers: {
                     'Authorization': this.apiKey,
                 },
-                data: data.body
+                data: data.body,
             });
 
             return res.data;
@@ -71,7 +71,7 @@ export default class API {
     async deleteDomain(name: string) {
         return await this.request({
             endpoint: `/domains/${name}`,
-            method: 'DELETE'
+            method: 'DELETE',
         });
     }
     /**
@@ -81,7 +81,7 @@ export default class API {
     async deleteInvite(invite: string) {
         return await this.request({
             endpoint: `/invites/${invite}`,
-            method: 'DELETE'
+            method: 'DELETE',
         });
     }
     /**
@@ -91,20 +91,20 @@ export default class API {
     async deleteImage(filename: string) {
         return await this.request({
             endpoint: `/admin/files/${filename}`,
-            method: 'DELETE'
+            method: 'DELETE',
         });
     }
     async addDomain(name: string, wildcard: boolean, donated: boolean, donatedBy: string, userOnly: boolean) {
         return await this.request2({
-            endpoint: `/domains/`,
+            endpoint: '/domains/',
             method: 'POST',
             body: [{
                 name: name,
                 wildcard: wildcard || false,
                 donated: donated || false,
-                donatedBy: donatedBy || "null",
-                userOnly: userOnly || false
-            }]
+                donatedBy: donatedBy || 'null',
+                userOnly: userOnly || false,
+            }],
         });
     }
     /**
@@ -147,27 +147,28 @@ export default class API {
 
     /**
      * Generate an invite code.
+     * @param {string} executor The user responsible
      */
-    async generateInvite(executer : string) {
+    async generateInvite(executor : string) {
         return await this.request({
             endpoint: '/admin/invites',
             method: 'POST',
             body: {
-                executerId: executer,
+                executerId: executor,
             },
         });
     }
+
     /**
-    * @param {string} command executor
+    * @param {string} executor The user responsible
     * @param {number} count of invites to create
     */
-
-    async generateBulkInvites(executer : string, count: number) {
+    async generateBulkInvites(executor : string, count: number) {
         return await this.request({
             endpoint: '/admin/bulkinvites',
             method: 'POST',
             body: {
-                executerId: executer,
+                executerId: executor,
                 count: count,
             },
         });
@@ -178,18 +179,20 @@ export default class API {
      *
      * @param {string} id The user's identifier.
      * @param {string} reason The reason for the blacklist.
+     * @param {string} executor The user responsible
      */
-    async blacklist(id: string, reason: string, executer : string) {
+    async blacklist(id: string, reason: string, executor: string) {
         return await this.request({
             endpoint: '/admin/blacklist',
             method: 'POST',
             body: {
                 id,
                 reason: reason ? reason : 'No reason provided',
-                executerId: executer,
+                executerId: executor,
             },
         });
     }
+
     async premium(id: string) {
         return await this.request({
             endpoint: '/admin/premium',
@@ -199,6 +202,7 @@ export default class API {
             },
         });
     }
+
     async verifyemail(id: string) {
         return await this.request({
             endpoint: '/admin/verifyemail',
@@ -208,6 +212,7 @@ export default class API {
             },
         });
     }
+
     async wipeuser(id: string) {
         return await this.request({
             endpoint: '/admin/wipe',
@@ -217,6 +222,7 @@ export default class API {
             },
         });
     }
+
     async unblacklist(id: string, reason: string, executer : string) {
         return await this.request({
             endpoint: '/admin/unblacklist',
@@ -228,6 +234,7 @@ export default class API {
             },
         });
     }
+
     async giveinv(id: string, amount: number) {
         return await this.request({
             endpoint: '/admin/inviteadd',
@@ -238,6 +245,7 @@ export default class API {
             },
         });
     }
+
     async setuid(id: string, newuid: number) {
         return await this.request({
             endpoint: '/admin/setuid',
@@ -248,6 +256,7 @@ export default class API {
             },
         });
     }
+
     async invWave(amount: number) {
         return await this.request({
             endpoint: '/admin/invitewave',
@@ -257,11 +266,12 @@ export default class API {
             },
         });
     }
+
     async addDomains(name: Object[]) {
         return await this.request2({
             endpoint: '/domains/',
             method: 'POST',
-            body: name
+            body: name,
         });
     }
 

@@ -14,7 +14,7 @@ export default class AdddomainCommand extends BaseCommand {
 
     async run(message: Message<TextChannel>, args: Array<string>) {
         if (!args[0] || !args[1] || !args[2] || !args[3] || !args[4]) return message.channel.createMessage({
-            embed: Error("Please specify an argument!\n`adddomain domain wildcard donated donatedby useronly`")
+            embed: Error('Please specify an argument!\n`adddomain domain wildcard donated donatedby useronly`'),
         });
 
         try {
@@ -23,8 +23,8 @@ export default class AdddomainCommand extends BaseCommand {
                 wildcard: JSON.parse(args[1]),
                 donated: JSON.parse(args[2]),
                 donatedBy: args[3],
-                userOnly: JSON.parse(args[4])
-            }
+                userOnly: JSON.parse(args[4]),
+            };
 
             await this.client.api.addDomain(
                 domainInfo.name,
@@ -32,15 +32,14 @@ export default class AdddomainCommand extends BaseCommand {
                 domainInfo.donated,
                 domainInfo.donatedBy,
                 domainInfo.userOnly
-            )
+            );
 
             message.channel.createMessage({
-                embed: Success("Successfully added domain: " + args[0])
+                embed: Success('Successfully added domain: ' + args[0]),
             });
-
         } catch (e) {
             return await message.channel.createMessage({
-                embed: Error(e.message)
+                embed: Error(e.message),
             });
         }
     }

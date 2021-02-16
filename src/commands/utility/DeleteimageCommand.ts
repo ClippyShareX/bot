@@ -14,20 +14,18 @@ export default class DeletedomainCommand extends BaseCommand {
 
     async run(message: Message<TextChannel>, args: Array<string>) {
         if (!args[0]) return message.channel.createMessage({
-            embed: Error("Please specify an argument!\n`delimage filename`")
+            embed: Error('Please specify an argument!\n`delimage filename`'),
         });
 
         try {
-
             await this.client.api.deleteImage(args[0]);
 
             await message.channel.createMessage({
-                embed: Success("Sucessfully deleted image: " + args[0])
+                embed: Success('Sucessfully deleted image: ' + args[0]),
             });
-
         } catch (e) {
             return await message.channel.createMessage({
-                embed: Error(e.message)
+                embed: Error(e.message),
             });
         }
     }

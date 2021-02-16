@@ -1,5 +1,5 @@
-import {Message} from 'eris';
-import {Error} from '../utils/Embeds';
+import { Message } from 'eris';
+import { Error } from '../utils/Embeds';
 import BaseCommand from '../utils/structures/BaseCommand';
 import BaseEvent from '../utils/structures/BaseEvent';
 
@@ -30,11 +30,11 @@ export default class MessageCreateEvent extends BaseEvent {
 
         const prefix = process.env.PREFIX;
         try {
-            if(message.channel.id === "799622023323975741" && !message.content.startsWith(",suggest")){
+            if (message.channel.id === '799622023323975741' && !message.content.startsWith(',suggest')) {
                 await message.delete();
                 return;
             }
-            if(message.channel.id === "804812690329174058" && message.content.toLowerCase() != "wawa"){
+            if (message.channel.id === '804812690329174058' && message.content.toLowerCase() != 'wawa') {
                 await message.delete();
                 return;
             }

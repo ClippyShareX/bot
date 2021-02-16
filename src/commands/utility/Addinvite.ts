@@ -1,5 +1,5 @@
 import { Message, TextChannel } from 'eris';
-import {Embed, Error, Success} from '../../utils/Embeds';
+import { Error, Success } from '../../utils/Embeds';
 import BaseCommand from '../../utils/structures/BaseCommand';
 
 export default class AddinviteCommand extends BaseCommand {
@@ -18,12 +18,12 @@ export default class AddinviteCommand extends BaseCommand {
         });
 
         try {
-            if(args[0] === "everyone"){
+            if (args[0] === 'everyone') {
                 await this.client.api.invWave(parseInt(args[1]));
                 await message.channel.createMessage({
-                    embed: Success('Invite wave go brr.'),
+                    embed: Success('Invite wave sent out.'),
                 });
-            }else {
+            } else {
                 await this.client.api.giveinv(message.mentions[0] ? message.mentions[0] .id : args[0], parseInt(args[1]));
 
                 await message.channel.createMessage({

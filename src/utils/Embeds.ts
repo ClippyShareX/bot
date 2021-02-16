@@ -1,7 +1,7 @@
 /* eslint-disable valid-jsdoc */
 import { EmbedInterface } from './interfaces/EmbedInterface';
 import colors from './colors.json';
-import {EmbedFooterOptions, EmbedImageOptions} from "eris";
+import { EmbedFooterOptions, EmbedImageOptions } from 'eris';
 
 /**
  * The embed builder class.

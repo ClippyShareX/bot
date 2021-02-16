@@ -1,12 +1,12 @@
 import { Message, TextChannel } from 'eris';
-import {Embed, Error, Success} from '../../utils/Embeds';
+import { Error, Success } from '../../utils/Embeds';
 import BaseCommand from '../../utils/structures/BaseCommand';
 
 export default class LookupCommand extends BaseCommand {
     constructor() {
         super({
             name: 'verifyemail',
-            description: `verifyemail someone's email`,
+            description: 'verifyemail someone\'s email',
             usage: 'verifyemail <uuid/username/email/invite/key/discord>',
             permissions: ['sendMessages', 'administrator'],
         });

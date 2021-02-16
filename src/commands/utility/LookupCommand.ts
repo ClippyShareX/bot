@@ -20,9 +20,9 @@ export default class LookupCommand extends BaseCommand {
             const { user } = await this.client.api.getUser(message.mentions[0] ? message.mentions[0] .id : args[0]);
             const embed = new Embed()
                 .setDescription(`UID ${user.uid} | [${user.username}](https://clippy.gg/u/${user.uid}) (${user.role})`)
-                .setThumbnail({url: user.avatar})
+                .setThumbnail({ url: user.avatar })
                 .setFooter({
-                    text: `UUID ${user.uuid} | Invited by ${user.invitedBy}`
+                    text: `UUID ${user.uuid} | Invited by ${user.invitedBy}`,
                 })
                 .addFields([
                     {
@@ -37,7 +37,7 @@ export default class LookupCommand extends BaseCommand {
                     },
                     {
                         name: 'Invites',
-                        value: user.invitedUsers[0] ? `\`\`\`${user.invitedUsers.join(', ')}\`\`\`` : "None",
+                        value: user.invitedUsers[0] ? `\`\`\`${user.invitedUsers.join(', ')}\`\`\`` : 'None',
                         inline: false,
                     },
                 ]);

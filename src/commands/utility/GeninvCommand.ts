@@ -15,9 +15,9 @@ export default class GeninvCommand extends BaseCommand {
     async run(message: Message<TextChannel>, args: Array<string>) {
         if (!message.member.roles.includes(process.env.ADMIN_ROLE)) return;
         try {
-            if(message.mentions[0]){
-                const dms = await message.mentions[0].getDMChannel()
-                const {link, code} = await this.client.api.generateInvite(message.author.id);
+            if (message.mentions[0]) {
+                const dms = await message.mentions[0].getDMChannel();
+                const { link, code } = await this.client.api.generateInvite(message.author.id);
                 const embed = new Embed()
                     .setTitle('Here is your invite')
                     .setUrl(link)
@@ -37,14 +37,13 @@ export default class GeninvCommand extends BaseCommand {
                 });
                 const embed2 = new Embed()
                     .setTitle('Sent invite in DMS')
-                    .setDescription("Successfully sent invite to " + message.mentions[0].username)
+                    .setDescription('Successfully sent invite to ' + message.mentions[0].username);
 
                 await message.channel.createMessage({
                     embed: embed2.embed,
                 });
-            }
-            else {
-                const {link, code} = await this.client.api.generateInvite(message.author.id);
+            } else {
+                const { link, code } = await this.client.api.generateInvite(message.author.id);
                 const embed = new Embed()
                     .setTitle('Here is an invite')
                     .setUrl(link)
@@ -63,7 +62,6 @@ export default class GeninvCommand extends BaseCommand {
                     embed: embed.embed,
                 });
             }
-
         } catch (err) {
             await message.channel.createMessage({
                 embed: Error(err.message),

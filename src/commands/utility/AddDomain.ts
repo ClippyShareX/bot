@@ -1,5 +1,5 @@
 import { Message, TextChannel } from 'eris';
-import {Embed, Error, Success} from '../../utils/Embeds';
+import { Error, Success } from '../../utils/Embeds';
 import BaseCommand from '../../utils/structures/BaseCommand';
 
 export default class AddDomainCommand extends BaseCommand {
@@ -14,17 +14,17 @@ export default class AddDomainCommand extends BaseCommand {
 
     async run(message: Message<TextChannel>, args: Array<string>) {
         if (!args[0]) return message.channel.createMessage({
-            embed: Error('Provide atleast one domain.'),
+            embed: Error('Provide at least one domain.'),
         });
 
         try {
             const domains = [];
-            for(const arg of args){
-                var domain = {
+            for (const arg of args) {
+                const domain = {
                     name: arg,
                     wildcard: true,
-                }
-                domains.push(domain)
+                };
+                domains.push(domain);
             }
             await this.client.api.addDomains(domains);
 

@@ -8,7 +8,7 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 const API_KEY = process.env.API_KEY;
 
 /**
- * Dny's discord client.
+ * Clippy's discord client.
  */
 export default class DiscordClient extends Client {
     /**
@@ -39,7 +39,7 @@ export default class DiscordClient extends Client {
      */
     async init() {
         try {
-           await handleCommands(this);
+            await handleCommands(this);
             await handleEvents(this);
 
             this.connect();

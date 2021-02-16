@@ -1,5 +1,5 @@
 import { Message, TextChannel } from 'eris';
-import {Embed, Error, Success} from '../../utils/Embeds';
+import { Error, Success } from '../../utils/Embeds';
 import BaseCommand from '../../utils/structures/BaseCommand';
 
 export default class LookupCommand extends BaseCommand {

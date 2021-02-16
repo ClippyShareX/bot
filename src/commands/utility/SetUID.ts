@@ -1,5 +1,5 @@
 import { Message, TextChannel } from 'eris';
-import {Embed, Error, Success} from '../../utils/Embeds';
+import { Error, Success } from '../../utils/Embeds';
 import BaseCommand from '../../utils/structures/BaseCommand';
 
 export default class AddinviteCommand extends BaseCommand {
@@ -18,10 +18,10 @@ export default class AddinviteCommand extends BaseCommand {
         });
 
         try {
-                await this.client.api.setuid(message.mentions[0] ? message.mentions[0] .id : args[0], parseInt(args[1]));
-                await message.channel.createMessage({
-                    embed: Success('Set uid successfully'),
-                });
+            await this.client.api.setuid(message.mentions[0] ? message.mentions[0] .id : args[0], parseInt(args[1]));
+            await message.channel.createMessage({
+                embed: Success('Set uid successfully'),
+            });
         } catch (err) {
             message.channel.createMessage({
                 embed: Error(err.message),

@@ -14,20 +14,18 @@ export default class DeletedomainCommand extends BaseCommand {
 
     async run(message: Message<TextChannel>, args: Array<string>) {
         if (!args[0]) return message.channel.createMessage({
-            embed: Error("Please specify an argument!\n`deldomain domain`")
+            embed: Error('Please specify an argument!\n`deldomain domain`'),
         });
 
         try {
-
             await this.client.api.deleteDomain(args[0]);
 
             await message.channel.createMessage({
-                embed: Success("Sucessfully deleted domain: " + args[0])
+                embed: Success('Sucessfully deleted domain: ' + args[0]),
             });
-
         } catch (e) {
             return await message.channel.createMessage({
-                embed: Error(e.message)
+                embed: Error(e.message),
             });
         }
     }
