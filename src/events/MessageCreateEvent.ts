@@ -26,7 +26,7 @@ export default class MessageCreateEvent extends BaseEvent {
 
     async run(message: Message) {
         if (message.author.bot) return;
-        if (message.channel.type === 1 || 3) return;
+        if (message.channel.type === 1) return;
 
         const prefix = process.env.PREFIX;
         try {
