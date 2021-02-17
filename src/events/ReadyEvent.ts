@@ -62,6 +62,11 @@ export default class ReadyEvent extends BaseEvent {
                     name: 'Domains: ' + count.toLocaleString(),
                 }).catch((e) => console.log(e));
             }
+            if ((this.client.getChannel('811747332659216384') as VoiceChannel).name != 'Boosts: ' + this.client.guilds.get('797483366634750063').premiumSubscriptionCount.toLocaleString()) {
+                await this.client.editChannel('811747332659216384', {
+                    name: 'Boosts: ' + this.client.guilds.get('797483366634750063').premiumSubscriptionCount.toLocaleString(),
+                }).catch((e) => console.log(e));
+            }
             setTimeout(async () => {
                 await this.changeStatus();
             }, 300000);
