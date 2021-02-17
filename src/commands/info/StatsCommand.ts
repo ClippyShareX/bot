@@ -6,7 +6,7 @@ export default class StatsCommand extends BaseCommand {
     constructor() {
         super({
             name: 'stats',
-            description: 'Get Dny\'s statistics.',
+            description: 'Get Clippy\'s statistics.',
             usage: 'stats',
             permissions: ['sendMessages'],
         });
