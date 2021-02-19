@@ -1,4 +1,5 @@
-import Axios, { Method } from 'axios';
+import { HTTPMethod } from '@helperdiscord/centra/dist/lib/CentraRequest';
+import req from '@helperdiscord/centra';
 
 /**
  * The API class, used to make requests to the backend.
@@ -15,31 +16,19 @@ export default class API {
 
     /**
      * Send a request to the api.
-     * @param {{ endpoint: string, method: Method, body: object }} data The request data.
+     * @param {{ endpoint: string, method: HTTPMethod, body: any }} data The request data.
      */
-    async request(data: { endpoint: string, method: Method, body?: object }) {
-        try {
-            const BASE_URL = process.env.BACKEND_URL;
+    async request(data: { endpoint: string, method: HTTPMethod, body?: any }) {
+        const res = await req(`${process.env.BACKEND_URL}${data.endpoint}`, data.method)
+            .header('Authorization', this.apiKey)
+            .body(data.body)
+            .send();
 
-            const res = await Axios({
-                url: `${BASE_URL}${data.endpoint}`,
-                method: data.method,
-                headers: {
-                    'Authorization': this.apiKey,
-                },
-                data: {
-                    ...data.body,
-                },
-            });
+        if (res.statusCode === 200) return res.json();
 
-            return res.data;
-        } catch (err) {
-            err = err.response.data.error;
-
-            throw new Error(
-                `${err.charAt(0).toUpperCase() + err.slice(1)}.`
-            );
-        }
+        throw new Error(
+            `Could not ${data.method} to ${data.endpoint} (status: ${res.statusCode})`
+        );
     }
 
     /**
