@@ -42,28 +42,6 @@ export default class API {
         }
     }
 
-    async request2(data: { endpoint: string, method: Method, body?: object }) {
-        try {
-            const BASE_URL = process.env.BACKEND_URL;
-
-            const res = await Axios({
-                url: `${BASE_URL}${data.endpoint}`,
-                method: data.method,
-                headers: {
-                    'Authorization': this.apiKey,
-                },
-                data: data.body,
-            });
-
-            return res.data;
-        } catch (err) {
-            err = err.response.data.error;
-
-            throw new Error(
-                `${err.charAt(0).toUpperCase() + err.slice(1)}.`
-            );
-        }
-    }
     /**
      * Deletes a current domain
      * @param {string} name Name of the domain
@@ -95,7 +73,7 @@ export default class API {
         });
     }
     async addDomain(name: string, wildcard: boolean, donated: boolean, donatedBy: string, userOnly: boolean) {
-        return await this.request2({
+        return await this.request({
             endpoint: '/domains/',
             method: 'POST',
             body: [{
@@ -268,7 +246,7 @@ export default class API {
     }
 
     async addDomains(name: Object[]) {
-        return await this.request2({
+        return await this.request({
             endpoint: '/domains/',
             method: 'POST',
             body: name,
