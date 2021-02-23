@@ -3,6 +3,9 @@ import { Error } from '../utils/Embeds';
 import BaseCommand from '../utils/structures/BaseCommand';
 import BaseEvent from '../utils/structures/BaseEvent';
 
+const ignoredChannels = process.env.IGNORED_CHANNELS.split(' ');
+const owners = process.env.OWNERS.split(' ');
+
 export default class MessageCreateEvent extends BaseEvent {
     constructor() {
         super({
@@ -25,8 +28,7 @@ export default class MessageCreateEvent extends BaseEvent {
     }
 
     async run(message: Message) {
-        if (message.author.bot) return;
-        if (message.channel.type === 1) return;
+        if (message.author.bot || message.channel.type === 1) return;
 
         const prefix = process.env.PREFIX;
         try {
@@ -38,7 +40,7 @@ export default class MessageCreateEvent extends BaseEvent {
                 await message.delete();
                 return;
             }
-            if (!message.content.startsWith(prefix)) return;
+            if ((ignoredChannels.includes(message.channel.id) && !owners.includes(message.author.id)) || !message.content.startsWith(prefix)) return;
             const args = message.content.slice(prefix.length).trim().split(/ +/g);
             const name = args.shift().toLowerCase();
             const command: BaseCommand = this.client.commands.get(name);

@@ -11,6 +11,7 @@ try {
         'BACKEND_URL',
         'OWNERS',
         'BOOSTER_ROLE',
+        'IGNORED_CHANNELS',
     ];
 
     for (const env of requiredEnvs) {
