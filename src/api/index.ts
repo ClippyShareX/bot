@@ -27,7 +27,7 @@ export default class API {
         if (res.statusCode === 200) return res.json();
 
         throw new Error(
-            `Could not ${data.method} to ${data.endpoint} (status: ${res.statusCode})`
+            `${res.json().error.replace(/\b\w/g, (c: string) => c.toUpperCase())}.`
         );
     }
 
