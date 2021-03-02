@@ -17,34 +17,35 @@ export default class LookupCommand extends BaseCommand {
             embed: Error('Provide a identifier.'),
         });
         try {
-            const { user } = await this.client.api.getUser(message.mentions[0] ? message.mentions[0] .id : args[0]);
-            const embed = new Embed()
-                .setDescription(`UID ${user.uid} | [${user.username}](https://clippy.gg/u/${user.uid}) (${user.role})`)
-                .setThumbnail({ url: user.avatar })
-                .setFooter({
-                    text: `UUID ${user.uuid} | Invited by ${user.invitedBy}`,
-                })
-                .addFields([
-                    {
-                        name: 'Statistics',
-                        value: `Uploaded ${user.uploads} images\n Last login was ${new Date(user.lastLogin).toLocaleString()}, registered at ${new Date(user.registrationDate).toLocaleString()}`,
-                        inline: true,
-                    },
-                    {
-                        name: 'Discord',
-                        value: user.discordId ? `<@${user.discordId}>` : 'Not Linked',
-                        inline: true,
-                    },
-                    {
-                        name: 'Invites',
-                        value: user.invitedUsers[0] ? `\`\`\`${user.invitedUsers.join(', ')}\`\`\`` : 'None',
-                        inline: false,
-                    },
-                ]);
-
-            await message.channel.createMessage({
-                embed: embed.embed,
-            });
+            const { users } = await this.client.api.getUsers(message.mentions[0] ? message.mentions[0] .id : args[0]);
+            for (const user of users) {
+                const embed = new Embed()
+                    .setDescription(`UID ${user.uid} | [${user.username}](https://clippy.gg/u/${user.uid}) (${user.role})`)
+                    .setThumbnail({url: user.avatar})
+                    .setFooter({
+                        text: `UUID ${user.uuid} | Invited by ${user.invitedBy}`,
+                    })
+                    .addFields([
+                        {
+                            name: 'Statistics',
+                            value: `Uploaded ${user.uploads} images\n Last login was ${new Date(user.lastLogin).toLocaleString()}, registered at ${new Date(user.registrationDate).toLocaleString()}`,
+                            inline: true,
+                        },
+                        {
+                            name: 'Discord',
+                            value: user.discordId ? `<@${user.discordId}>` : 'Not Linked',
+                            inline: true,
+                        },
+                        {
+                            name: 'Invites',
+                            value: user.invitedUsers[0] ? `\`\`\`${user.invitedUsers.join(', ')}\`\`\`` : 'None',
+                            inline: false,
+                        },
+                    ]);
+                await message.channel.createMessage({
+                    embed: embed.embed,
+                });
+            }
         } catch (err) {
             message.channel.createMessage({
                 embed: Error(err.message),
