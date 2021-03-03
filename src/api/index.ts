@@ -182,7 +182,7 @@ export default class API {
 
     async wipeuser(id: string) {
         return await this.request({
-            endpoint: '/admin/wipe',
+            endpoint: '/admin/wipeuser',
             method: 'POST',
             body: {
                 id,
