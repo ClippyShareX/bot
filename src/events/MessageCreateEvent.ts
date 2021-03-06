@@ -32,9 +32,8 @@ export default class MessageCreateEvent extends BaseEvent {
 
         const prefix = process.env.PREFIX;
         try {
-            if (message.channel.id === '799622023323975741' && !message.content.startsWith('%suggest')) {
-                await message.delete();
-                return;
+            if (message.channel.id === '799622023323975741' && !message.content.toLowerCase().startsWith('%suggest')) {
+                return void await message.delete();
             }
             if ((ignoredChannels.includes(message.channel.id) && !owners.includes(message.author.id)) || !message.content.startsWith(prefix)) return;
             const args = message.content.slice(prefix.length).trim().split(/ +/g);
