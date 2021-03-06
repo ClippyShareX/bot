@@ -247,7 +247,7 @@ export default class API {
      * @param {string} id The user's identifier.
      */
     async getUsers(id: string) {
-        return await this.request({
+		return await this.request({
             endpoint: `/admin/users/${id}`,
             method: 'GET',
         });

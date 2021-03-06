@@ -20,10 +20,10 @@ export default class LookupCommand extends BaseCommand {
             const { users } = await this.client.api.getUsers(message.mentions[0] ? message.mentions[0] .id : args[0]);
             for (const user of users) {
                 const embed = new Embed()
-                    .setDescription(`UID ${user.uid} | [${user.username}](https://clippy.gg/u/${user.uid}) (${user.role})`)
+                    .setDescription(`UID ${user.uid} | [${user.username}](https://clippy.gg/u/${user.uid}) (${user.blacklisted.status ? "Blacklisted" : (user.admin ? 'Admin' : (user.premium ? 'Premium' : 'Whitelisted'))})`)
                     .setThumbnail({url: user.avatar})
                     .setFooter({
-                        text: `UUID ${user.uuid} | Invited by ${user.invitedBy}`,
+                        text: `UUID ${user._id} | Invited by ${user.invitedBy}`,
                     })
                     .addFields([
                         {
@@ -33,7 +33,7 @@ export default class LookupCommand extends BaseCommand {
                         },
                         {
                             name: 'Discord',
-                            value: user.discordId ? `<@${user.discordId}>` : 'Not Linked',
+                            value: user.discord.id ? `<@${user.discord.id}>` : 'Not Linked',
                             inline: true,
                         },
                         {
